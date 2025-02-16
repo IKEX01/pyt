@@ -18,6 +18,8 @@ thanks [ytmusicapi](https://github.com/sigma67/ytmusicapi) lib for ytmusic clien
 
 ## run
 
+- `default port: 8000`, `default host: 0.0.0.0`
+
 - run the development server: `fastapi dev ./src/main.py`
 
 - run the production server: `uvicorn src.main:app --host <specific-host> --port <specific-port>`
