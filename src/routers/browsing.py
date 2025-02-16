@@ -24,6 +24,9 @@ async def get_artist(
   ytmusic = YTMusic()
   search_results = ytmusic.get_artist(channelId)
 
+  if not search_results:
+    raise HTTPException(status_code=404, detail="Artist not found")
+
   return {
     "message": "OK",
     "query": channelId,
@@ -58,6 +61,9 @@ async def get_album(
   ytmusic = YTMusic()
   results = ytmusic.get_album(browseId)
 
+  if not results:
+    raise HTTPException(status_code=404, detail="Album not found")
+
   return {
     "message": "OK",
     "query": browseId,
@@ -83,6 +89,9 @@ async def get_user(
 ):
   ytmusic = YTMusic()
   results = ytmusic.get_user(channelId)
+
+  if not results:
+    raise HTTPException(status_code=404, detail="User not found")
 
   return {
     "message": "OK",
@@ -126,6 +135,9 @@ async def get_song(
   ytmusic = YTMusic()
   results = ytmusic.get_song(videoId, signatureTimestamp)
 
+  if not results:
+    raise HTTPException(status_code=404, detail="Song not found")
+
   return {
     "message": "OK",
     "query": videoId,
@@ -152,6 +164,9 @@ async def get_lyrics(
 ):
   ytmusic = YTMusic()
   results = ytmusic.get_lyrics(browseId, timestamps)
+
+  if not results:
+    raise HTTPException(status_code=404, detail="Lyrics not found")
 
   return {
     "message": "OK",

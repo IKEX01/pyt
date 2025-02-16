@@ -21,6 +21,9 @@ async def search(
     scope=scope
   )
 
+  if not search_results:
+    raise HTTPException(status_code=404, detail="No search result found")
+
   return {
     "message": "OK",
     "query": query,
@@ -37,6 +40,9 @@ async def get_search_suggestions(
     query=query,
     detailed_runs=detailed_runs
   )
+  
+  if not search_results:
+    raise HTTPException(status_code=404, detail="No search result found")
 
   return {
     "message": "OK",

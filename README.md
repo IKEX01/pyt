@@ -40,6 +40,7 @@ thanks [ytmusicapi](https://github.com/sigma67/ytmusicapi) lib for ytmusic clien
 ## Usage
 
 - API endpoints:
-  - `/search?q=<query>`: search for a song, album, or artist.
-  - `/top_tracks?limit=<limit>`: get top tracks
+  - `/search/<query>`: search for a song, album, or artist.
+  - `/lyrics/<videoid>`: get lyrics from video.
+  - `/top_tracks?limit=<limit>`: get top tracks.
   - etc. **( More information in [localhost:8000/docs](localhost:8000/docs) )**

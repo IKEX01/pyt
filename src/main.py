@@ -1,11 +1,12 @@
 from fastapi import FastAPI
-from src.routers import search, browsing, explore, watch
+from src.routers import search, browsing, explore, watch, library
 
 app = FastAPI()
 app.include_router(search.router)
 app.include_router(browsing.router)
 app.include_router(explore.router)
 app.include_router(watch.router)
+app.include_router(library.router)
 
 @app.get("/")
 def root():

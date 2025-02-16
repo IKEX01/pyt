@@ -30,6 +30,9 @@ async def get_watch_playlist(
     shuffle=shuffle
   )
 
+  if not results:
+    raise HTTPException(status_code=404, detail="Video not found")
+
   return {
     "message": "OK",
     "query": videoId,
