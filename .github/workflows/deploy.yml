@@ -1,0 +1,50 @@
+name: Deploy API Docs
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          pip install fastapi mkdocs mkdocs-material pyyaml
+
+      - name: Generate OpenAPI Docs
+        run: |
+          mkdir -p docs
+          python -c "from fastapi.openapi.utils import get_openapi; from src.main import app; import json; open('docs/openapi.json', 'w').write(json.dumps(get_openapi(title='API Docs', version='1.0.0', routes=app.routes), indent=2))"
+
+      - name: Create MkDocs Config
+        run: |
+          echo "site_name: API Docs" > mkdocs.yml
+          echo "theme:" >> mkdocs.yml
+          echo "  name: material" >> mkdocs.yml
+          echo "nav:" >> mkdocs.yml
+          echo "  - API Reference: openapi.json" >> mkdocs.yml
+
+      - name: Build Docs
+        run: mkdocs build
+
+      - name: Deploy to GitHub Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: "site"
+
+      - name: Deploy GitHub Pages
+        uses: actions/deploy-pages@v2
