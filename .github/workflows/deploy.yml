@@ -31,8 +31,9 @@ jobs:
 
       - name: Create MkDocs Config
         run: |
-          echo "site_name: py-ytmusic-api docs" > mkdocs.yml
-          echo "site_url: https://ponlponl123.github.io/py-ytmusic-api" > mkdocs.yml
+          echo "site_name: py-ytmusic-api docs" >> mkdocs.yml
+          echo "site_url: https://ponlponl123.github.io/py-ytmusic-api" >> mkdocs.yml
+          echo "repo_url: https://github.com/Ponlponl123/py-ytmusic-api" >> mkdocs.yml
           echo "theme:" >> mkdocs.yml
           echo "  name: material" >> mkdocs.yml
           echo "nav:" >> mkdocs.yml
