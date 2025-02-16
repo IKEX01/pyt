@@ -20,7 +20,7 @@ jobs:
 
       - name: Generate OpenAPI spec
         run: |
-          python -c "from src.main import app; import json; with open('openapi.json', 'w') as f: json.dump(app.openapi(), f)"
+          python ./src/generate_openapi.py
 
       - name: Build ReDoc HTML
         run: |
