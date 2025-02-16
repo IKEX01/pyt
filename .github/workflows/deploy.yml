@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install fastapi mkdocs mkdocs-material pyyaml
+          pip install -r requirements.txt
 
       - name: Generate OpenAPI Docs
         run: |
