@@ -22,7 +22,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install mkdocs mkdocs-material neoteroi-mkdocs pymdown-extensions mkdocs-openapi
+          pip install mkdocs mkdocs-material neoteroi-mkdocs pymdown-extensions mkdocs-swagger-ui-tag
 
       - name: Generate OpenAPI Docs
         run: |
@@ -48,8 +48,10 @@ jobs:
           echo "  - search" >> mkdocs.yml
           echo "  - neoteroi.mkdocsoad:" >> mkdocs.yml
           echo "      use_pymdownx: true" >> mkdocs.yml
-          echo "  - openapi:" >> mkdocs.yml
-          echo "      path: openapi.json" >> mkdocs.yml
+          echo "  - swagger_ui:" >> mkdocs.yml
+          echo "      spec_file: openapi.json" >> mkdocs.yml
+          echo "      swagger_ui_config:" >> mkdocs.yml
+          echo "        docExpansion: none" >> mkdocs.yml
           echo "extra_css:" >> mkdocs.yml
           echo "  - css/mkdocsoad.css" >> mkdocs.yml
 
