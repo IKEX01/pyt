@@ -3,13 +3,6 @@ from ytmusicapi import YTMusic
 
 router = APIRouter()
 
-@router.get("/watch")
-def watch_default():
-  raise HTTPException(
-    status_code=400,
-    detail="Missing required parameter"
-  )
-
 @router.get("/mood_categories")
 def get_mood_categories():
   ytmusic = YTMusic()

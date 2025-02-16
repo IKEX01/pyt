@@ -3,14 +3,6 @@ from ytmusicapi import YTMusic
 
 router = APIRouter()
 
-@router.get("/charts")
-@router.get("/mood_playlists")
-def explore_default():
-  raise HTTPException(
-    status_code=400,
-    detail="Missing required parameter"
-  )
-
 @router.get("/mood_playlists/{query}")
 async def search(
   query: str

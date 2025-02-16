@@ -4,21 +4,6 @@ from ytmusicapi import YTMusic
 
 router = APIRouter()
 
-@router.get("/song")
-@router.get("/user")
-@router.get("/lyrics")
-@router.get("/artist")
-@router.get("/get_album")
-@router.get("/user_videos")
-@router.get("/song_related")
-@router.get("/artist_albums")
-@router.get("/user_playlists")
-def browsing_default():
-  raise HTTPException(
-    status_code=400,
-    detail="Missing required parameter"
-  )
-
 @router.get("/home")
 async def get_home(
   limit: int = 3

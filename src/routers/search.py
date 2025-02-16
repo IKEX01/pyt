@@ -1,14 +1,8 @@
+from typing import Any
 from fastapi import APIRouter, HTTPException
 from ytmusicapi import YTMusic
 
 router = APIRouter()
-
-@router.get("/search")
-def search_default():
-  raise HTTPException(
-    status_code=400,
-    detail="Missing required parameter"
-  )
 
 @router.get("/search/{query}")
 async def search(
@@ -50,9 +44,9 @@ async def get_search_suggestions(
     "result": search_results
   }
 
-@router.delete("/search_suggestions/{query}")
+@router.delete("/search_suggestions")
 async def remove_search_suggestions(
-  suggestions: list[dict[str, any]],
+  suggestions: list[dict[str, Any]],
   indices: list[int] | None = None
 ):
   ytmusic = YTMusic()
