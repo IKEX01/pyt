@@ -40,9 +40,7 @@ jobs:
           echo "  - API Reference: openapi.json" >> mkdocs.yml
 
       - name: Build Docs
-        run: |
-          mkdocs build
-          mkdocs gh-deploy
+        run: mkdocs build
 
       - name: Deploy to GitHub Pages
         uses: actions/configure-pages@v5
