@@ -20,7 +20,7 @@ jobs:
 
       - name: Generate OpenAPI spec
         run: |
-          python ./src/generate_openapi.py
+          python src/generate_openapi.py
 
       - name: Build ReDoc HTML
         run: |
