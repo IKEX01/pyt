@@ -1,12 +1,12 @@
 from typing import Any
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 from ytmusicapi import YTMusic
 
 router = APIRouter()
 
-@router.get("/search/{query}")
+@router.get("/search")
 async def search(
-  query: str,
+  query: str = Query(..., description="Search query"),
   filter: str | None = None,
   ignore_spelling: bool = False,
   limit: int = 20,
@@ -30,9 +30,9 @@ async def search(
     "result": search_results
   }
 
-@router.get("/search_suggestions/{query}")
+@router.get("/search_suggestions")
 async def get_search_suggestions(
-  query: str,
+  query: str = Query(..., description="Search query"),
   detailed_runs: bool = False
 ):
   ytmusic = YTMusic()
