@@ -101,10 +101,13 @@ async def get_user(
 
 @router.get("/user_playlists/{channelId}")
 async def get_user_playlists(
-  channelId: str,
-  params: str
+  channelId: str
 ):
   ytmusic = YTMusic()
+  channel = ytmusic.get_user(channelId)
+  if not channel:
+    raise HTTPException(status_code=404, detail="User not found")
+  params = channel["videos"]["params"]
   results = ytmusic.get_user_playlists(channelId, params)
 
   return {
@@ -115,10 +118,13 @@ async def get_user_playlists(
 
 @router.get("/user_videos/{channelId}")
 async def get_user_videos(
-  channelId: str,
-  params: str
+  channelId: str
 ):
   ytmusic = YTMusic()
+  channel = ytmusic.get_user(channelId)
+  if not channel:
+    raise HTTPException(status_code=404, detail="User not found")
+  params = channel["videos"]["params"]
   results = ytmusic.get_user_videos(channelId, params)
 
   return {
