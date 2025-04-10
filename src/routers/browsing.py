@@ -33,6 +33,25 @@ async def get_artist(
     "result": search_results
   }
 
+@router.get("/artist_videos/{channelId}")
+async def get_artist_videos(
+  channelId: str
+):
+  ytmusic = YTMusic()
+  artist_results = ytmusic.get_artist(channelId)
+
+  if not artist_results:
+    raise HTTPException(status_code=404, detail="Artist not found")
+  
+  browseId = artist_results["videos"]["browseId"]
+  videos = ytmusic.get_playlist(browseId)
+
+  return {
+    "message": "OK",
+    "query": channelId,
+    "result": videos
+  }
+
 @router.get("/artist_albums/{channelId}")
 async def get_artist_albums(
   channelId: str,
@@ -85,19 +104,29 @@ async def get_album_browse_id(
 
 @router.get("/user/{channelId}")
 async def get_user(
-  channelId: str
+    channelId: str
 ):
-  ytmusic = YTMusic()
-  results = ytmusic.get_user(channelId)
+    ytmusic = YTMusic()
+    try:
+        results = ytmusic.get_user(channelId)
+        if not results:
+            raise HTTPException(status_code=404, detail="User not found")
+    except KeyError as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unexpected response structure: {str(e)}"
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"An error occurred: {str(e)}"
+        )
 
-  if not results:
-    raise HTTPException(status_code=404, detail="User not found")
-
-  return {
-    "message": "OK",
-    "query": channelId,
-    "result": results
-  }
+    return {
+        "message": "OK",
+        "query": channelId,
+        "result": results
+    }
 
 @router.get("/user_playlists/{channelId}")
 async def get_user_playlists(
