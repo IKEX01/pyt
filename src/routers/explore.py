@@ -17,7 +17,7 @@ async def search(
   }
 
 @router.get("/charts/{country}")
-async def get_search_suggestions(
+async def get_charts(
   country: str = 'ZZ'
 ):
   ytmusic = YTMusic()

@@ -179,8 +179,8 @@ async def get_song(
     "result": results
   }
 
-@router.get("/song_related/{browseId}")
-async def get_song_related(
+@router.get("/related/{browseId}")
+async def get_related_by_browse_id(
   browseId: str
 ):
   ytmusic = YTMusic()
@@ -190,6 +190,26 @@ async def get_song_related(
     "message": "OK",
     "query": browseId,
     "result": results
+  }
+
+@router.get("/song_related/{songId}")
+async def get_song_related_by_song_id(
+  songId: str
+):
+  ytmusic = YTMusic()
+  watch_playlist = ytmusic.get_watch_playlist(songId)
+  if not watch_playlist or not watch_playlist["related"]:
+    raise HTTPException(status_code=404, detail="Song not found")
+  
+  results = ytmusic.get_song_related(watch_playlist["related"])
+
+  return {
+    "message": "OK",
+    "query": songId,
+    "result": {
+      "playlist": watch_playlist,
+      "related": results
+    }
   }
 
 @router.get("/lyrics/{browseId}")
