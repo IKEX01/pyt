@@ -18,7 +18,7 @@ app.include_router(uploads.router)
 
 @app.get("/")
 def root():
-  return {"message": "Hello YT Music API!"}
+  return {"message": "Hello This Is Billa YT Music API!"}
 
 @app.get("/docs", include_in_schema=False)
 async def custom_swagger_ui_html():
@@ -45,4 +45,4 @@ async def redoc_html():
 
 if __name__ == "__main__":
   import uvicorn
-  uvicorn.run(app, host="0.0.0.0")
+  uvicorn.run(app, host="82.25.112.8")
